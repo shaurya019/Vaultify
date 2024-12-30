@@ -64,7 +64,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BankResponse balanceEnquiry(EnquiryRequest request) {
-        return null;
+        boolean isAccountExist = userRepository.existsByAccountNumber(request.getAccountNumber());
+        if(!isAccountExist){
+            return BankResponse.builder()
+                    .responseCode(AccountUtils.ACCOUNT_NOT_EXIST_CODE)
+                    .responseMessage(AccountUtils.ACCOUNT_NOT_EXIST_MESSAGE)
+                    .accountInfo(null)
+                    .build();
+        }
+        User foundUser = userRepository.findByAccountNumber(request.getAccountNumber());
+        return BankResponse.builder()
+                .responseCode(AccountUtils.ACCOUNT_CREATION_SUCCESS)
+                .responseMessage(AccountUtils.ACCOUNT_CREATION_MESSAGE)
+                .accountInfo(AccountInfo.builder().accountName(foundUser.getFirstName() + " " + foundUser.getLastName() + " " + foundUser.getOtherName()).accountNumber(foundUser.getAccountNumber()).accountBalance(foundUser.getAccountBalance()).build())
+                .build();
     }
 
     @Override
