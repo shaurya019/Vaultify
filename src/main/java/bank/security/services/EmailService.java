@@ -1,4 +1,7 @@
 package bank.security.services;
 
-public class EmailService {
+import bank.security.dto.EmailDetails;
+
+public interface EmailService {
+    void sendEmailAlert(EmailDetails emailDetails);
 }

@@ -24,21 +24,21 @@ public class UserController {
 
     @GetMapping("balanceEnquiry")
     public BankResponse balanceEnquiry(@RequestBody EnquiryRequest request){
-        return userService.balanceEnquiry(userRequest);
+        return userService.balanceEnquiry(request);
     }
 
     @GetMapping("nameEnquiry")
-    public BankResponse nameEnquiry(@RequestBody EnquiryRequest request){
-        return userService.nameEnquiry(userRequest);
+    public String nameEnquiry(@RequestBody EnquiryRequest request){
+        return userService.nameEnquiry(request);
     }
 
     @PostMapping("credit")
     public BankResponse creditAccount(@RequestBody CreditDebitRequest request){
-        return userService.creditAccount(userRequest);
+        return userService.creditAccount(request);
     }
 
     @PostMapping("debit")
     public BankResponse debitAccount(@RequestBody CreditDebitRequest request){
-        return userService.debitAccount(userRequest);
+        return userService.debitAccount(request);
     }
 }
